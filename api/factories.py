@@ -1,4 +1,3 @@
-import datetime
 import random
 
 import factory
@@ -44,8 +43,3 @@ class LectureGroupFactory(factory.django.DjangoModelFactory):
     lecture = factory.SubFactory(LectureFactory)
     group = factory.SubFactory(GroupFactory)
     auditorium = factory.SubFactory(AuditoriumFactory)
-    start_datetime = factory.Faker(
-        "date_between_dates",
-        date_start=datetime.datetime(2021, 10, 8, 8, 0, 0),
-        date_end=datetime.datetime(2021, 10, 18, 17, 0, 0),
-    )
