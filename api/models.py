@@ -8,7 +8,7 @@ class Group(models.Model):
 class Student(models.Model):
     name = models.CharField(verbose_name="Student name", max_length=100)
     email = models.EmailField(verbose_name="E-mail")
-    group = models.ForeignKey(Group, related_name="students", on_delete=models.PROTECT)
+    group = models.ForeignKey(Group, related_name="students", on_delete=models.SET_NULL, null=True)
 
 
 class Lecture(models.Model):
@@ -22,7 +22,7 @@ class Auditorium(models.Model):
 
 
 class LectureGroup(models.Model):
-    lecture = models.ForeignKey(Lecture, related_name="lectures", on_delete=models.DO_NOTHING)
-    group = models.ForeignKey(Group, related_name="groups", on_delete=models.DO_NOTHING)
-    auditorium = models.ForeignKey(Auditorium, related_name="audiences", on_delete=models.DO_NOTHING)
+    lecture = models.ForeignKey(Lecture, related_name="lectures", on_delete=models.SET_NULL, null=True)
+    group = models.ForeignKey(Group, related_name="groups", on_delete=models.SET_NULL, null=True)
+    auditorium = models.ForeignKey(Auditorium, related_name="audiences", on_delete=models.SET_NULL, null=True)
     start_datetime = models.DateTimeField(verbose_name="Start lecture")
