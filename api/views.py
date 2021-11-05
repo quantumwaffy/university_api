@@ -18,6 +18,11 @@ class StudentParamsMixin:
     queryset = models.Student.objects.all()
 
 
+class LectureParamsMixin:
+    serializer_class = serializers.LectureSerializer
+    queryset = models.Lecture.objects.all()
+
+
 class AuditoriumListView(AuditoriumParamsMixin, generics.ListAPIView):
     pass
 
@@ -52,3 +57,15 @@ class StudentCreateView(StudentParamsMixin, generics.CreateAPIView):
 
 class StudentRetrieveUpdateDestroyView(StudentParamsMixin, generics.RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = "student_id"
+
+
+class LectureListView(LectureParamsMixin, generics.ListAPIView):
+    pass
+
+
+class LectureCreateView(LectureParamsMixin, generics.CreateAPIView):
+    pass
+
+
+class LectureRetrieveUpdateDestroyView(LectureParamsMixin, generics.RetrieveUpdateDestroyAPIView):
+    lookup_url_kwarg = "lecture_id"
