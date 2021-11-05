@@ -13,6 +13,11 @@ class GroupParamsMixin:
     queryset = models.Group.objects.all()
 
 
+class StudentParamsMixin:
+    serializer_class = serializers.StudentSerializer
+    queryset = models.Student.objects.all()
+
+
 class AuditoriumListView(AuditoriumParamsMixin, generics.ListAPIView):
     pass
 
@@ -35,3 +40,15 @@ class GroupCreateView(GroupParamsMixin, generics.CreateAPIView):
 
 class GroupRetrieveUpdateDestroyView(GroupParamsMixin, generics.RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = "group_id"
+
+
+class StudentListView(StudentParamsMixin, generics.ListAPIView):
+    pass
+
+
+class StudentCreateView(StudentParamsMixin, generics.CreateAPIView):
+    pass
+
+
+class StudentRetrieveUpdateDestroyView(StudentParamsMixin, generics.RetrieveUpdateDestroyAPIView):
+    lookup_url_kwarg = "student_id"

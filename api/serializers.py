@@ -6,22 +6,32 @@ from api import models
 class AuditoriumSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Auditorium
-        exclude = ("id",)
-
-
-class GroupSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = models.Group
-        exclude = ("id",)
+        fields = "__all__"
 
 
 class LectureSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Lecture
-        exclude = ("id",)
+        fields = "__all__"
+
+
+class StudentSerializer(serializers.ModelSerializer):
+    group = serializers.SlugRelatedField(queryset=models.Group.objects.all(), slug_field="name")
+
+    class Meta:
+        model = models.Student
+        fields = "__all__"
+
+
+class GroupSerializer(serializers.ModelSerializer):
+    students = StudentSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = models.Group
+        fields = "__all__"
 
 
 class ScheduleSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.LectureGroup
-        exclude = ("id",)
+        fields = "__all__"
