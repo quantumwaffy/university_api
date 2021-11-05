@@ -12,7 +12,7 @@ class Student(models.Model):
 
 
 class Lecture(models.Model):
-    name = models.CharField(verbose_name="Lecture name", max_length=20)
+    name = models.CharField(verbose_name="Lecture name", max_length=20, unique=True)
     group = models.ManyToManyField(Group, through="LectureGroup", through_fields=("lecture", "group"))
 
 
