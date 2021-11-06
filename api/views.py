@@ -2,6 +2,7 @@ import datetime
 
 from rest_framework import generics, status, viewsets
 from rest_framework.generics import get_object_or_404
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
 from api import models, serializers
@@ -37,11 +38,12 @@ class AuditoriumListView(AuditoriumParamsMixin, generics.ListAPIView):
 
 
 class AuditoriumCreateView(AuditoriumParamsMixin, generics.CreateAPIView):
-    pass
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class AuditoriumRetrieveUpdateDestroyView(AuditoriumParamsMixin, generics.RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = "auditorium_id"
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class GroupListView(GroupParamsMixin, generics.ListAPIView):
@@ -49,11 +51,12 @@ class GroupListView(GroupParamsMixin, generics.ListAPIView):
 
 
 class GroupCreateView(GroupParamsMixin, generics.CreateAPIView):
-    pass
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class GroupRetrieveUpdateDestroyView(GroupParamsMixin, generics.RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = "group_id"
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class StudentListView(StudentParamsMixin, generics.ListAPIView):
@@ -61,11 +64,12 @@ class StudentListView(StudentParamsMixin, generics.ListAPIView):
 
 
 class StudentCreateView(StudentParamsMixin, generics.CreateAPIView):
-    pass
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class StudentRetrieveUpdateDestroyView(StudentParamsMixin, generics.RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = "student_id"
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class LectureListView(LectureParamsMixin, generics.ListAPIView):
@@ -73,11 +77,12 @@ class LectureListView(LectureParamsMixin, generics.ListAPIView):
 
 
 class LectureCreateView(LectureParamsMixin, generics.CreateAPIView):
-    pass
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class LectureRetrieveUpdateDestroyView(LectureParamsMixin, generics.RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = "lecture_id"
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class ScheduleListView(ScheduleParamsMixin, generics.ListAPIView):
@@ -85,11 +90,12 @@ class ScheduleListView(ScheduleParamsMixin, generics.ListAPIView):
 
 
 class ScheduleCreateView(ScheduleParamsMixin, generics.CreateAPIView):
-    pass
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class ScheduleRetrieveUpdateDestroyView(ScheduleParamsMixin, generics.RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = "schedule_id"
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class ScheduleListViewSet(ScheduleParamsMixin, viewsets.ModelViewSet):
