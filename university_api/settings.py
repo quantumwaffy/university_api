@@ -89,6 +89,8 @@ WSGI_APPLICATION = "university_api.wsgi.application"
 
 DATABASES = "Your DB"
 
+CELERY_BROKER = "Your broker"
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
