@@ -1,4 +1,8 @@
-from rest_framework import generics
+import datetime
+
+from rest_framework import generics, status, viewsets
+from rest_framework.generics import get_object_or_404
+from rest_framework.response import Response
 
 from api import models, serializers
 
@@ -86,3 +90,28 @@ class ScheduleCreateView(ScheduleParamsMixin, generics.CreateAPIView):
 
 class ScheduleRetrieveUpdateDestroyView(ScheduleParamsMixin, generics.RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = "schedule_id"
+
+
+class ScheduleListViewSet(ScheduleParamsMixin, viewsets.ModelViewSet):
+    http_method_names = ["post"]
+
+    def list(self, request, *args, **kwargs):
+        request_schedule_date = request.data.get("schedule_date")
+        request_schedule_group = request.data.get("schedule_group")
+        if not request_schedule_date or not request_schedule_group:
+            error_text = "schedule_date is required" if not request_schedule_date else "schedule_group is required"
+            return Response(data={"error": error_text}, status=status.HTTP_400_BAD_REQUEST)
+        group_object = get_object_or_404(models.Group, name=request_schedule_group)
+        try:
+            schedule_date = datetime.datetime.strptime(request_schedule_date, "%Y-%m-%d").date()
+        except ValueError as e:
+            raise Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+        else:
+            qs_response = self.queryset.filter(
+                group=group_object,
+                start_datetime__range=[
+                    datetime.datetime.combine(schedule_date, datetime.time.min),
+                    datetime.datetime.combine(schedule_date, datetime.time.max),
+                ],
+            )
+        return Response(data=self.serializer_class(qs_response, many=True).data, status=status.HTTP_200_OK)

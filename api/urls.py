@@ -18,4 +18,5 @@ urlpatterns = [
     path("schedule/list/", views.ScheduleListView.as_view()),
     path("schedule/detail/<int:schedule_id>/", views.ScheduleRetrieveUpdateDestroyView.as_view()),
     path("schedule/detail/create/", views.ScheduleCreateView.as_view()),
+    path("get-date-schedule/", views.ScheduleListViewSet.as_view({"post": "list"})),
 ]
