@@ -35,7 +35,7 @@ class Command(BaseCommand):
 
         audiences = []
         for _ in range(AUDITORIUM_COUNT):
-            auditorium = AuditoriumFactory(capacity=random.randint(0, 70))
+            auditorium = AuditoriumFactory(capacity=random.randint(30, 70))
             audiences.append(auditorium)
 
         lectures = []
