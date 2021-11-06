@@ -23,6 +23,11 @@ class LectureParamsMixin:
     queryset = models.Lecture.objects.all()
 
 
+class ScheduleParamsMixin:
+    serializer_class = serializers.ScheduleSerializer
+    queryset = models.LectureGroup.objects.all()
+
+
 class AuditoriumListView(AuditoriumParamsMixin, generics.ListAPIView):
     pass
 
@@ -69,3 +74,15 @@ class LectureCreateView(LectureParamsMixin, generics.CreateAPIView):
 
 class LectureRetrieveUpdateDestroyView(LectureParamsMixin, generics.RetrieveUpdateDestroyAPIView):
     lookup_url_kwarg = "lecture_id"
+
+
+class ScheduleListView(ScheduleParamsMixin, generics.ListAPIView):
+    pass
+
+
+class ScheduleCreateView(ScheduleParamsMixin, generics.CreateAPIView):
+    pass
+
+
+class ScheduleRetrieveUpdateDestroyView(ScheduleParamsMixin, generics.RetrieveUpdateDestroyAPIView):
+    lookup_url_kwarg = "schedule_id"

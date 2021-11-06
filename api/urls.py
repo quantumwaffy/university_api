@@ -15,4 +15,7 @@ urlpatterns = [
     path("lecture/list/", views.LectureListView.as_view()),
     path("lecture/detail/<int:lecture_id>/", views.LectureRetrieveUpdateDestroyView.as_view()),
     path("lecture/detail/create/", views.LectureCreateView.as_view()),
+    path("schedule/list/", views.ScheduleListView.as_view()),
+    path("schedule/detail/<int:schedule_id>/", views.ScheduleRetrieveUpdateDestroyView.as_view()),
+    path("schedule/detail/create/", views.ScheduleCreateView.as_view()),
 ]

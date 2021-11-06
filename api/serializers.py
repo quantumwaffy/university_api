@@ -32,6 +32,10 @@ class GroupSerializer(serializers.ModelSerializer):
 
 
 class ScheduleSerializer(serializers.ModelSerializer):
+    lecture = serializers.SlugRelatedField(queryset=models.Lecture.objects.all(), slug_field="name")
+    group = serializers.SlugRelatedField(queryset=models.Group.objects.all(), slug_field="name")
+    auditorium = serializers.SlugRelatedField(queryset=models.Auditorium.objects.all(), slug_field="number")
+
     class Meta:
         model = models.LectureGroup
         fields = "__all__"
