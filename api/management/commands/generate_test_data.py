@@ -53,7 +53,7 @@ class Command(BaseCommand):
                 auditorium=random.choice(audiences),
                 lecture=random.choice(lectures),
                 start_datetime=randomtimestamp(
-                    start=datetime.datetime(2021, 11, 5, 8, 0, 0), end=datetime.datetime(2021, 12, 30, 17, 0, 0)
+                    start=datetime.datetime(2021, 11, 5, 8, 0), end=datetime.datetime(2021, 12, 30, 17, 0)
                 ),
             )
 
