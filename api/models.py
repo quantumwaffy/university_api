@@ -26,3 +26,6 @@ class LectureGroup(models.Model):
     group = models.ForeignKey(Group, related_name="groups", on_delete=models.SET_NULL, null=True)
     auditorium = models.ForeignKey(Auditorium, related_name="audiences", on_delete=models.SET_NULL, null=True)
     start_datetime = models.DateTimeField(verbose_name="Start lecture")
+
+    class Meta:
+        ordering = ["start_datetime"]
