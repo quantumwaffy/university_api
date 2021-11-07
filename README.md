@@ -1,26 +1,26 @@
 # University api service
-###Description
+### Description
 The api service supports CRUD for all objects such as Auditorium, Lecture, Group, Student and Schedule. Implemented 
 sending emails every evening at 8:30pm (Sunday, Monday, Tuesday, Wednesday, Thursday) for all students who have a 
 lecture schedule tomorrow. Implemented a endpoint to get the schedule for a selected date for a specific group. 
 The service architecture is easily expandable in the future.
 
-###Quickstart
-#####Clone the repository:
+### Quickstart
+##### Clone the repository:
 ```console
 git clone https://github.com/quantumwaffy/university_api.git
 ```
-#####Go to the downloaded project:
+##### Go to the downloaded project:
 ```console
 cd university_api
 ```
-#####Up docker container:
+##### Up docker container:
 ```console
 docker-compose up -d
 ```
 After the container is up, the application will run on localhost:8000/api/.
-####The following urls are available for making requests:
-#####Authorization is required to create, edit or delete any entries.
+#### The following urls are available for making requests:
+##### Authorization is required to create, edit or delete any entries.
 <ul><b>auditorium/list/</b> -get info about all audiences</ul>
 <ul><b>auditorium/detail/[auditorium_id]/</b> -get, update, delete info about selected audience</ul>
 <ul><b>auditorium/create/</b> -create new auditorium</ul>
