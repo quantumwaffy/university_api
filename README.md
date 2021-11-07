@@ -20,7 +20,7 @@ docker-compose up -d
 ```
 After the container is up, the application will run on localhost:8000/api/.
 #### The following urls are available for making requests:
-##### Authorization is required to create, edit or delete any entries.
+<i>Authorization is required to create, edit or delete any entries.<i>
 <ul><b>auditorium/list/</b> -get info about all audiences</ul>
 <ul><b>auditorium/detail/[auditorium_id]/</b> -get, update, delete info about selected audience</ul>
 <ul><b>auditorium/create/</b> -create new auditorium</ul>
