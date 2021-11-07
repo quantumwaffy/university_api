@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Group(models.Model):
-    name = models.CharField(verbose_name="Group name", max_length=8)
+    name = models.CharField(verbose_name="Group name", max_length=8, unique=True)
 
 
 class Student(models.Model):
