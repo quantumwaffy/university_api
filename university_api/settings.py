@@ -98,12 +98,12 @@ DATABASES = {
         "NAME": env("DATABASE_NAME"),
         "USER": env("DATABASE_USER"),
         "PASSWORD": env("DATABASE_PASSWORD"),
-        "HOST": "127.0.0.1",
+        "HOST": "db",
         "PORT": "5432",
     }
 }
 
-CELERY_BROKER = "pyamqp://guest@localhost//"
+CELERY_BROKER = "pyamqp://guest@rabbit:5672//"
 
 
 # Password validation
@@ -155,10 +155,3 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = env("EMAIL_HOST_USER")
 EMAIL_HOST_PASSWORD = env("EMAIL_HOST_PASSWORD")
 EMAIL_USE_TLS = True
-
-
-if DEBUG:
-    try:
-        from .local_settings import *
-    except ImportError:
-        pass
