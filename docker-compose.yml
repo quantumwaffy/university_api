@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+    db:
+      image: postgres
+      env_file:
+        - ./university_api/.env
+      volumes:
+        - ./data/db:/var/lib/postgresql/data
+      ports:
+        - "5435:5432"
+      restart: on-failure
+
+    rabbit:
+      image: rabbitmq:3-management-alpine
+      env_file:
+        - ./university_api/.env
+      ports:
+        - "5675:5672"
+        - "15675:15672"
+      restart: on-failure
+
+    celery:
+      build: .
+      command: celery -A university_api worker -l info -B
+      volumes:
+        - .:/usr/src/app
+      depends_on:
+        - rabbit
+        - db
+
+    api:
+      build: .
+      command: >
+        bash -c "python3 /usr/src/app/manage.py migrate &
+        python3 /usr/src/app/manage.py generate_test_data &
+        python3 /usr/src/app/manage.py test &
+        python3 /usr/src/app/manage.py runserver 0.0.0.0:8000
+        "
+      volumes:
+        - .:/usr/src/app
+      ports:
+        - "8000:8000"
+      depends_on:
+        - db
