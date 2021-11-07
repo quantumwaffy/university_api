@@ -14,11 +14,11 @@ git clone https://github.com/quantumwaffy/university_api.git
 ```console
 cd university_api
 ```
-##### Up docker container:
+##### Up docker containers:
 ```console
 docker-compose up -d
 ```
-After the container is up, the application will run on localhost:8000/api/.
+After the container is up, the application will run on localhost:8000/api/ .
 #### The following urls are available for making requests:
 <i>Authorization is required to create, edit or delete any entries.<i>
 <ul><b>auditorium/list/</b> -get info about all audiences</ul>
