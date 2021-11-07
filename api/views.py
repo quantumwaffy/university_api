@@ -111,7 +111,7 @@ class ScheduleListViewSet(ScheduleParamsMixin, viewsets.ModelViewSet):
         try:
             schedule_date = datetime.datetime.strptime(request_schedule_date, "%Y-%m-%d").date()
         except ValueError as e:
-            raise Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
+            return Response(data={"error": str(e)}, status=status.HTTP_400_BAD_REQUEST)
         else:
             qs_response = self.queryset.filter(
                 group=group_object,
