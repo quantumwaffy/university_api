@@ -19,7 +19,7 @@ app.conf.enable_utc = False
 
 app.conf.beat_schedule = {
     "send_tomorrow_schedule": {
-        "task": "university_api.tasks.send_lecture_schedule_to_email",
+        "task": "api.tasks.send_lecture_schedule_to_email",
         "schedule": crontab(hour=20, minute=30, day_of_week=[0, 1, 2, 3, 4]),
     },
 }
