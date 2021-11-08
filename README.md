@@ -16,7 +16,7 @@ cd university_api
 ```
 ##### Up docker containers:
 ```console
-docker-compose up -d --build
+docker-compose up --build -d
 ```
 After the container is up, the application will run on localhost:8000/api/ .
 #### The following urls are available for making requests:
