@@ -6,10 +6,25 @@ services:
       env_file:
         - ./university_api/.env
       volumes:
-        - ./data/db:/var/lib/postgresql/data
+        - pgdb_data:/var/lib/postgresql/data
       ports:
         - "5435:5432"
       restart: on-failure
+
+    api:
+      build: .
+      command: >
+        bash -c "python3 /usr/src/app/manage.py migrate &
+        python3 /usr/src/app/manage.py generate_test_data &
+        python3 /usr/src/app/manage.py test &
+        python3 /usr/src/app/manage.py runserver 0.0.0.0:8000
+        "
+      volumes:
+        - .:/usr/src/app
+      ports:
+        - "8000:8000"
+      depends_on:
+        - db
 
     rabbit:
       image: rabbitmq:3-management-alpine
@@ -26,20 +41,8 @@ services:
       volumes:
         - .:/usr/src/app
       depends_on:
+        - api
         - rabbit
         - db
-
-    api:
-      build: .
-      command: >
-        bash -c "python3 /usr/src/app/manage.py migrate &
-        python3 /usr/src/app/manage.py generate_test_data &
-        python3 /usr/src/app/manage.py test &
-        python3 /usr/src/app/manage.py runserver 0.0.0.0:8000
-        "
-      volumes:
-        - .:/usr/src/app
-      ports:
-        - "8000:8000"
-      depends_on:
-        - db
+volumes:
+  pgdb_data:
