@@ -5,3 +5,4 @@ WORKDIR /usr/src/app
 COPY . /usr/src/app
 RUN pip install --upgrade pip
 RUN pip install -r /usr/src/app/requirements.txt
+CMD ["gunicorn", "university_api.wsgi:application"]
