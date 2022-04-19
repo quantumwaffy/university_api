@@ -13,18 +13,20 @@ services:
 
     api:
       build: .
+      image: quantumwaffy/university-api:1.0.0
+      depends_on:
+        - db
       command: >
-        bash -c "python3 /usr/src/app/manage.py migrate &
-        python3 /usr/src/app/manage.py generate_test_data &
-        python3 /usr/src/app/manage.py test &
-        python3 /usr/src/app/manage.py runserver 0.0.0.0:8000
+        bash -c "python manage.py wait_for_db &&
+        python3 manage.py migrate &&
+        python3 manage.py generate_test_data &&
+        python3 manage.py test &&
+        python3 manage.py runserver 0.0.0.0:8000
         "
       volumes:
         - .:/usr/src/app
       ports:
         - "8000:8000"
-      depends_on:
-        - db
 
     rabbit:
       image: rabbitmq:3-management-alpine
@@ -37,12 +39,13 @@ services:
 
     celery:
       build: .
-      command: celery -A university_api worker -l info -B
-      volumes:
-        - .:/usr/src/app
+      image: quantumwaffy/university-api:1.0.0
       depends_on:
         - api
         - rabbit
         - db
+      command: celery -A university_api worker -l info -B
+      volumes:
+        - .:/usr/src/app
 volumes:
   pgdb_data:
