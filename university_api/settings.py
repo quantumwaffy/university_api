@@ -103,8 +103,6 @@ DATABASES = {
     }
 }
 
-CELERY_BROKER = "pyamqp://guest@rabbit:5672//"
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
